@@ -1,21 +1,23 @@
 const playBtn = document.getElementById('play');
-const audio = new Audio('./assets/song.mp3');
+const progressBar = document.querySelector('.progressbar input');
+const startTime = document.querySelectorAll('.time')[0];
+const endTime = document.querySelectorAll('.time')[1];
+
+
+const audio = new Audio('./sample_audio.mp3');
 let isPlaying = false;
 
 playBtn.addEventListener('click', () => {
   if (!isPlaying) {
     audio.play();
     isPlaying = true;
-    playBtn.src = './assets/pause_icon.png';
+    playBtn.src = './pause_icon.png';
   } else {
     audio.pause();
     isPlaying = false;
     playBtn.src = './assets/player_icon3.png';
   }
 });
-const progressBar = document.querySelector('.progressbar input');
-const startTime = document.querySelectorAll('.time')[0];
-const endTime = document.querySelectorAll('.time')[1];
 
 audio.addEventListener('loadedmetadata', () => {
   progressBar.max = audio.duration;
@@ -36,3 +38,4 @@ function formatTime(time) {
   let seconds = Math.floor(time % 60).toString().padStart(2, '0');
   return `${minutes}:${seconds}`;
 }
+
